@@ -1,0 +1,91 @@
+.calendar {
+  position: absolute;
+  right: 20px;
+  left: 200px;
+  top: 0;
+  bottom: 150px;
+}
+
+.calendar-header {
+
+  height: 60px;
+
+  .date {
+    position: absolute;
+    padding: 15px;
+    font-weight: bold;
+  }
+
+  .action {
+    cursor: pointer;
+    width: 15px;
+    height: 22px;
+    position: absolute;
+    top: 10px;
+    display: inline-block;
+
+    &:hover {
+      opacity: .6;
+    }
+
+  }
+
+  .prev {
+    @extends .action;
+    background-image: url('../images/chevron-left.png');
+    left: 180px;
+  }
+
+  .next {
+    @extends .action;
+    background-image: url('../images/chevron-right.png');
+    left: 220px;
+  }
+}
+
+
+.week-days {
+
+  border-bottom: 1px solid #ccc;
+
+  &:first-child {
+    border-top: 1px solid #ccc;
+  }
+}
+
+.day-container {
+    width: 100 / 7 * 1%;
+    border-right: 1px solid #ccc;
+
+    &:first-child {
+      border-left: 1px solid #ccc;
+    }
+
+    &:hover {
+      background-color: #ffccff;
+    }
+}
+
+.day-name {
+  line-height: 26px;
+  font-weight: bold;
+}
+
+.day {
+
+  cursor: pointer;
+
+  &.today {
+    background-color: $secondary-color;
+    color: #FFF;
+  }
+
+  &.selected {
+    background-color: #CCC;
+  }
+
+  &.different-month {
+    color: #999;
+  }
+
+}

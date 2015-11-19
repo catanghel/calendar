@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-xs-6">
+    <span>Title</span>
+  </div>
+  <div class="col-xs-6">
+    <span>Description</span>
+  </div>
+</div>
+<div class="row" ng-repeat="calendar in calendars">
+  <div class="col-xs-6">
+    <span>{{ calendar.title }}</span>
+  </div>
+  <div class="col-xs-6">
+    <span>{{ calendar.description }}</span>
+  </div>
+</div>
