@@ -1,4 +1,10 @@
 <div class="content">
-  <div class="vertical-nav"></div>
+  <div class="vertical-nav">
+	<ul>  
+	  <li ng-repeat="calendar in calendars">
+	    <span ng-click="onCalendarSelect(calendar._id)">{{ calendar.title }}</span>
+	  </li>
+	</ul>
+  </div>
   <div class="calendar" calendar></div>
 </div>
