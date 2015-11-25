@@ -1,17 +1,10 @@
-'use strict';
+/*global $, _*/
+(function() {
+  'use strict';
 
-/**
- * @ngdoc function
- * @name clientApp.controller:CalendarCtrl
- * @description
- * # CalendarCtrl
- * Controller of the clientApp
- */
-angular.module('clientApp')
-  .controller('CalendarCtrl', function ($scope, Calendar, CalendarEvent) {
-    var i, event, day;
+  angular.module('clientApp').controller('CalendarCtrl', function ($scope, Calendar, CalendarEvent) {
+    var day;
 
-    // just testing restangular and node-restful with parameters
     $scope.calendars = [];
     $scope.events = [];
     $scope.calendar = '';
@@ -31,7 +24,9 @@ angular.module('clientApp')
         return e.start.month === $scope.month.month() && e.start.year === $scope.month.year();
       });
 
-      _.each(eventsThisMonth, function(e, k) {
+      $('.event').remove();
+
+      _.each(eventsThisMonth, function(e) {
         if (e) {
           day = $('[data-day=' + e.start.day + ']').find('.events-container');
           day.empty();
@@ -48,3 +43,4 @@ angular.module('clientApp')
 
     Calendar.getList().then(getCalendars);
   });
+})();

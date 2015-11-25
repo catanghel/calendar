@@ -1,13 +1,7 @@
-'use strict';
+(function() {
+  'use strict';
 
-/**
- * @ngdoc service
- * @name clientApp.CalendarEventRestangular
- * @description
- * # CalendarEventRestangular
- * Factory in the clientApp.
- */
-angular.module('clientApp')
+  angular.module('clientApp')
   .factory('CalendarEventRestangular', function (Restangular) {
 
     return Restangular.withConfig(function(RestangularConfigurer) {
@@ -20,3 +14,4 @@ angular.module('clientApp')
 
     return CalendarEventRestangular.service('events');
   });
+})();
