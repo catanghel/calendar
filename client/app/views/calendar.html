@@ -5,8 +5,9 @@
     </div>
 
     <div class="list-group calendar-list">
-    <li class="list-group-item" ng-repeat="calendar in calendars" ng-click="onCalendarSelect(calendar._id)">
+      <li class="list-group-item" ng-repeat="calendar in calendars" ng-click="onCalendarSelect(calendar._id)">
         {{ calendar.title }}
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
       </li>
     </div>
   </div>
