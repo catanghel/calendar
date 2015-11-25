@@ -46,46 +46,43 @@
 
 .week-days {
 
-  border-bottom: 1px solid #ccc;
-
-  &:first-child {
-    border-top: 1px solid #ccc;
-  }
 }
 
 .day-container {
-    width: 100 / 7 * 1%;
-    border-right: 1px solid #ccc;
+  width: 100 / 7 * 1%;
+    //border-right: 1px solid #ccc;
 
     &:first-child {
-      border-left: 1px solid #ccc;
+      .day {
+        color: $event-red;
+      }
     }
 
     &:hover {
       background-color: #ffccff;
     }
-}
-
-.day-name {
-  line-height: 26px;
-  font-weight: bold;
-}
-
-.day {
-
-  cursor: pointer;
-
-  &.today {
-    background-color: $secondary-color;
-    color: #FFF;
   }
 
-  &.selected {
-    background-color: #CCC;
+  .day-name {
+    line-height: 26px;
+    font-weight: bold;
   }
 
-  &.different-month {
-    color: #999;
-  }
+  .day {
 
-}
+    cursor: pointer;
+
+    &.today {
+      background-color: $secondary-color;
+      color: #FFF;
+    }
+
+    &.selected {
+      background-color: #CCC;
+    }
+
+    &.different-month {
+      color: #999;
+    }
+
+  }
