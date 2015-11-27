@@ -7,48 +7,54 @@
  */
  'use strict';
 
-var restful = require('node-restful');
+ var restful = require('node-restful');
 
-module.exports = function(app, route) {
+ module.exports = function(app, route) {
 
-  var http = require('http').Server(app);
+/*  var http = require('http').Server(app);
   var io = require('socket.io')(http);
+  io.on('connection', function (socket) {
+    socket.emit('a message', {
+      everyone: 'in',
+      '/': 'will get'
+    });
+});*/
 
-  var rest = restful.model(
-    'event',
-    app.models.event
+var rest = restful.model(
+  'event',
+  app.models.event
   ).methods(['get', 'put', 'post', 'delete']);
 
-  rest.after('put', function(req, res, next) {
-    var locals = res.locals;
-    console.log('Updated event: ' + locals.bundle._id);
+rest.after('put', function(req, res, next) {
+  var locals = res.locals;
+  console.log('Updated event: ' + locals.bundle._id);
 
-    io.emit('event:update', req.body);
-
-    next();
-  });
-
-  rest.after('post', function(req, res, next) {
-    var locals = res.locals;
-    console.log('Created Event: ' + locals.bundle._id);
-
-    io.emit('event:create', req.body);
+    //io.emit('event:update', req.body);
 
     next();
   });
 
-  rest.after('delete', function(req, res, next) {
-    var locals = res.locals;
-    console.log('Deleted event.');
+rest.after('post', function(req, res, next) {
+  var locals = res.locals;
+  console.log('Created Event: ' + locals.bundle._id);
 
-    io.emit('event:delete', req.body);
+    //io.emit('event:create', req.body);
 
     next();
   });
 
-  rest.register(app, route);
+rest.after('delete', function(req, res, next) {
+  var locals = res.locals;
+  console.log('Deleted event.');
 
-  return function(req, res, next) {
+    //io.emit('event:delete', req.body);
+
     next();
-  };
+  });
+
+rest.register(app, route);
+
+return function(req, res, next) {
+  next();
+};
 };

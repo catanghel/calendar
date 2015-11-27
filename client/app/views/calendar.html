@@ -1,13 +1,15 @@
 <div class="content">
   <div class="vertical-nav">
-    <div class="group-header">
-      <span class="header-text">Calendars </span><a class="btn btn-danger pull-right">New +</a>
+    <div class="group-header center-block">
+      <h3 class="text-center text-danger">Calendar</h3>
     </div>
-
+    <div class="text-center">
+      <a class="btn btn-danger">CREATE</a>
+    </div>
     <div class="list-group calendar-list">
       <li class="list-group-item" ng-repeat="calendar in calendars" ng-click="onCalendarSelect(calendar._id)">
+        <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
         {{ calendar.title }}
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
       </li>
     </div>
   </div>

@@ -1,10 +1,11 @@
+@import 'reset';
+@import 'variables';
+@import 'calendar';
+
 // bower:scss
 @import "bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
 
-@import 'reset';
-@import 'variables';
-@import 'calendar';
 
 body {
 	font-family: $font-stack;

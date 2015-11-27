@@ -4,7 +4,7 @@
 
   angular.module('clientApp').directive('calendar', function () {
     return {
-      templateUrl: 'templates/calendar.html',
+      templateUrl: 'templates/calendar.tpl.html',
       restrict: 'A',
       link: function(scope) {
         var start;

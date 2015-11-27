@@ -17,7 +17,7 @@
 <body ng-app="clientApp">
 
   <div class="container" ng-view=""></div>
-
+  <script src="http://localhost:3000/socket.io/socket.io.js"></script>
   <!-- build:js(.) scripts/vendor.js -->
   <!-- bower:js -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -35,10 +35,11 @@
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
   <script src="scripts/app.module.js"></script>
   <script src="scripts/app.routes.js"></script>
-  <script src="scripts/controllers/calendar.controller.js"></script>
-  <script src="scripts/directives/calendar.directive.js"></script>
   <script src="scripts/services/calendar.restangular.js"></script>
   <script src="scripts/services/event.restangular.js"></script>
+
+  <script src="scripts/controllers/calendar.controller.js"></script>
+  <script src="scripts/directives/calendar.directive.js"></script>
   <!-- endbuild -->
 </body>
 </html>

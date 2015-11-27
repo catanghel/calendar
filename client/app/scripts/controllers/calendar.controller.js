@@ -1,13 +1,19 @@
-/*global $, _*/
+/*global $, _, moment*/
 (function() {
   'use strict';
 
   angular.module('clientApp').controller('CalendarCtrl', function ($scope, Calendar, CalendarEvent) {
-    var day;
 
     $scope.calendars = [];
     $scope.events = [];
     $scope.calendar = '';
+
+    var socket = io.connect('http://localhost:3000');
+
+    socket.on('message', function (msg) {
+      console.log(msg);
+      socket.emit('ceva', 'altceva');
+    });
 
     $scope.onCalendarSelect = function (id) {
       $scope.calendar = id;
@@ -21,26 +27,41 @@
       }
 
       eventsThisMonth = _.filter($scope.events, function(e) {
-        return e.start.month === $scope.month.month() && e.start.year === $scope.month.year();
+        var eventDate = moment(e.start);
+        var month = eventDate.month();
+        var year = eventDate.year();
+        return month === $scope.month.month() && year === $scope.month.year();
       });
 
       $('.event').remove();
 
       _.each(eventsThisMonth, function(e) {
+        var dayOfMonth;
         if (e) {
-          day = $('[data-day=' + e.start.day + ']').find('.events-container');
+          dayOfMonth = moment(e.start).date();
+          day = $('[data-day=' + dayOfMonth + ']').find('.events-container');
           day.empty();
           day.append('<li class="event">' + e.title + '</li>');
         }
       });
     };
 
-    function getCalendars(calendars) {
+    function getEvents(calendars) {
       $scope.calendars = calendars;
-      $scope.calendar = $scope.calendars[0]._id;
-      CalendarEvent.getList({calendar: $scope.calendar}).then($scope.populate);
+      if (calendars.length) {
+        $scope.onCalendarSelect($scope.calendars[0]._id);
+      }
     }
 
-    Calendar.getList().then(getCalendars);
-  });
+
+    Calendar.getList().then(getEvents);
+
+
+
+/*
+    Socket.on('error', function (err) {
+      console.log(err);
+    });
+*/
+});
 })();

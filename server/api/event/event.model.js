@@ -4,37 +4,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
-var date = new Schema({
-  year: {
-    type: Number,
-    required: true
-  },
-  month: {
-    type: Number,
-    min: 0,
-    max: 11,
-    required: true
-  },
-  day: {
-    type: Number,
-    min: 1,
-    max: 31,
-    required: true
-  },
-  hour: {
-    type: Number,
-    min: 0,
-    max: 23,
-    required: true
-  },
-  minute: {
-    type: Number,
-    min: 0,
-    max: 60,
-    required: true
-  }
-});
-
 var CalendarEventSchema = new Schema({
   title: {
     type: String,
@@ -56,8 +25,14 @@ var CalendarEventSchema = new Schema({
     type: Boolean,
     default: false
   },
-  start: date,
-  end: date
+  start: {
+    type: Number,
+    required: false
+  },
+  end: {
+    type: Number,
+    required: false
+  }
 });
 
 module.exports = CalendarEventSchema;
