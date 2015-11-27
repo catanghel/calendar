@@ -27,7 +27,7 @@ app.models = require('./models');
 
 routes = require('./routes');
 _.each(routes, function(controller, route) {
-	app.use(route, controller(app, route));
+	app.use(route, controller(app, route, io));
 });
 
 // Connect to database
@@ -35,13 +35,12 @@ mongoose.connect('mongodb://localhost:27017/calendar');
 mongoose.connection.on('error', function(err) {
 	console.error('MongoDB connection error: ' + err);
 	process.exit(-1); 
-}
-);
+});
 
 server = require('http').createServer(app);
-var io = require('socket.io')(server);
-io.on('connection', function (socket) {
-	io.emit('message', 'plm');
+app.io = require('socket.io')(server);
+app.io.on('connection', function (socket) {
+	app.io.emit('message', 'connected');
 });
 
 

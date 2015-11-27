@@ -2,17 +2,14 @@
 (function() {
   'use strict';
 
-  angular.module('clientApp').controller('CalendarCtrl', function ($scope, Calendar, CalendarEvent) {
+  angular.module('clientApp').controller('CalendarCtrl', function ($scope, Calendar, CalendarEvent, Socket) {
 
     $scope.calendars = [];
     $scope.events = [];
     $scope.calendar = '';
 
-    var socket = io.connect('http://localhost:3000');
-
-    socket.on('message', function (msg) {
+    Socket.on('message', function (msg) {
       console.log(msg);
-      socket.emit('ceva', 'altceva');
     });
 
     $scope.onCalendarSelect = function (id) {
@@ -53,15 +50,15 @@
       }
     }
 
+    Socket.on('calendar', function (msg) {
+      console.log(msg);
+      Calendar.getList().then(function(calendars) {
+        $scope.calendars = calendars;
+      });
+    });
+
 
     Calendar.getList().then(getEvents);
 
-
-
-/*
-    Socket.on('error', function (err) {
-      console.log(err);
-    });
-*/
-});
+  });
 })();
