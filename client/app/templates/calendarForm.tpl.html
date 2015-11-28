@@ -1,0 +1,31 @@
+<div class="modal-header">
+  <h3 class="modal-title">Calendar</h3>
+</div>
+<form role="form">
+  <div class="modal-body">
+    <div class="form-container" ng-hide="isConfirmScreen">
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" id="title" ng-model="calendar.title">
+      </div>
+      <div class="form-group">
+        <label for="desc">Desription (optional):</label>
+        <input type="text" class="form-control" id="desc" ng-model="calendar.description">
+      </div>
+      <div class="form-group">
+        <label for="pwd">Color (optional):</label>
+        <input type="color" class="form-control" id="pwd" ng-model="calendar.color">
+      </div>
+    </div>
+    <div class="confirm-container" ng-show="isConfirmScreen">
+      <p>Are you sure you want to delete the '{{calendar.title}}' calendar?</p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-danger pull-left" type="button" ng-click="isConfirmScreen = true" ng-hide="isConfirmScreen || !isEditMode">DELETE</button>
+    <button class="btn btn-primary" type="button" ng-click="save()" ng-hide="isConfirmScreen">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()" ng-hide="isConfirmScreen">Cancel</button>
+    <button class="btn btn-success" type="button" ng-click="delete()" ng-show="isConfirmScreen">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="isConfirmScreen = false" ng-show="isConfirmScreen">Cancel</button>
+  </div>
+</form>

@@ -2,11 +2,11 @@
 (function() {
   'use strict';
 
-  angular.module('clientApp').controller('CalendarCtrl', function ($scope, Calendar, CalendarEvent, Socket) {
+  angular.module('clientApp').controller('CalendarCtrl', function ($scope, Calendar, CalendarEvent, Socket, $uibModal) {
 
     $scope.calendars = [];
     $scope.events = [];
-    $scope.calendar = '';
+    $scope.calendar = {};
 
     Socket.on('message', function (msg) {
       console.log(msg);
@@ -33,7 +33,7 @@
       $('.event').remove();
 
       _.each(eventsThisMonth, function(e) {
-        var dayOfMonth;
+        var dayOfMonth, day;
         if (e) {
           dayOfMonth = moment(e.start).date();
           day = $('[data-day=' + dayOfMonth + ']').find('.events-container');
@@ -41,6 +41,27 @@
           day.append('<li class="event">' + e.title + '</li>');
         }
       });
+    };
+
+    $scope.open = function (id) {
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: './templates/calendarForm.tpl.html',
+        controller: 'CalendarFormCtrl',
+        size: 'md',
+        resolve: {
+          calendarId: function () {
+            return id;
+          }
+        }
+      });
+
+      /*modalInstance.result.then(function (calendarItem) {
+        console.log(calendarItem);
+      }, function () {
+        console.log('Modal dismissed at: ' + new Date());
+      });*/
     };
 
     function getEvents(calendars) {

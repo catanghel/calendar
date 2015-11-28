@@ -20,14 +20,19 @@ body {
 	width: 200px;
 	height: 100%;
 	padding: 15px 10px;
-  position: absolute;
-  left: 0;
+	position: absolute;
+	left: 0;
 }
 
 .calendar-list {
-  clear: both;
-  margin-top: 55px;
+	clear: both;
+	margin-top: 55px;
+	
+	.list-group-item {
+		cursor: pointer;
+	}
 }
+
 
 
 

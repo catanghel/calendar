@@ -43,10 +43,9 @@ app.io.on('connection', function (socket) {
 	app.io.emit('message', 'connected');
 });
 
-
 // Start server
 server.listen(3000, 'localhost', function () {
 	console.log('Express server listening on %d, in %s mode', 3000, app.get('env'));
-});
+}); 
 
 module.exports = app;

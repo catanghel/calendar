@@ -50,39 +50,35 @@
 
 .day-container {
   width: 100 / 7 * 1%;
-    //border-right: 1px solid #ccc;
+  height: 100 / 5 * 1%;
+  cursor: pointer;
 
-    &:first-child {
-      .day {
-        color: $event-red;
-      }
-    }
-
-    &:hover {
-      background-color: #ffccff;
-    }
-  }
-
-  .day-name {
-    line-height: 26px;
+  &.today {
+    background-color: $today-color;
     font-weight: bold;
-  }
-
-  .day {
-
-    cursor: pointer;
-
-    &.today {
-      background-color: $secondary-color;
-      color: #FFF;
-    }
-
     &.selected {
-      background-color: #CCC;
+      background-color: $today-color;
     }
-
-    &.different-month {
-      color: #999;
-    }
-
   }
+
+  &.selected {
+    background-color: #fff5ff;
+  }
+
+  &.different-month {
+    color: #999;
+  }
+
+  &.long-month {
+    height: 100 / 6 * 1%;
+  }
+}
+
+.day-name {
+  line-height: 26px;
+  font-weight: bold;
+}
+
+.event {
+  font-weight: normal;
+}

@@ -17,21 +17,17 @@ var CalendarEventSchema = new Schema({
     type: ObjectId,
     required: true
   },
-  color: {
-    type: String,
-    default: 'NONE'
-  },
   isAllDay: {
     type: Boolean,
     default: false
   },
   start: {
     type: Number,
-    required: false
+    required: true
   },
   end: {
     type: Number,
-    required: false
+    required: true
   }
 });
 

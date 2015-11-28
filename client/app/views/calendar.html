@@ -4,12 +4,23 @@
       <h3 class="text-center text-danger">Calendar</h3>
     </div>
     <div class="text-center">
-      <a class="btn btn-danger">CREATE</a>
+      <div class="btn-group" uib-dropdown>
+        <button id="split-button" type="button" class="btn btn-danger">CREATE</button>
+        <button type="button" class="btn btn-danger" uib-dropdown-toggle>
+          <span class="caret"></span>
+          <span class="sr-only">Split button!</span>
+        </button>
+        <ul class="uib-dropdown-menu" role="menu" aria-labelledby="split-button">
+          <li role="menuitem"><a ng-click="open()">Calendar</a></li>
+          <li role="menuitem"><a href="#">Event</a></li>
+        </ul>
+      </div>
     </div>
     <div class="list-group calendar-list">
       <li class="list-group-item" ng-repeat="calendar in calendars" ng-click="onCalendarSelect(calendar._id)">
-        <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-th-large" aria-hidden="true" style="color: {{calendar.color}}"></span>
         {{ calendar.title }}
+        <span class="glyphicon glyphicon-cog pull-right" aria-hidden="true" ng-click="open(calendar._id)"></span>
       </li>
     </div>
   </div>
