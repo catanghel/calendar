@@ -1,0 +1,10 @@
+<div>
+  <a class="pull-right" ng-click="eventPopOver.close()">Close</a>
+</div>
+<h1>{{calendarEvent.title}}</h1>
+<p>{{eventDate}}</p>
+<p>Calendar: {{calendar.title}}</p>
+<div>
+  <a class="pull-left">Delete</a>
+  <a class="pull-right" ng-click="openEventModal(calendarEvent._id)">Edit event >></a>
+</div>

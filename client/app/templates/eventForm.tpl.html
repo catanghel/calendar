@@ -1,0 +1,78 @@
+<div class="modal-header">
+  <h3 class="modal-title">Event</h3>
+</div>
+<form role="form" class="form-horizontal">
+  <div class="modal-body">
+    <div class="form-container" ng-hide="isConfirmScreen">
+      <div class="form-group">
+        <label for="title" class="col-sm-4 control-label">Title:</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="title" ng-model="calendarEvent.title">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="date" class="col-sm-4 control-label">Date:</label>
+        <div class="col-md-8">
+          <p class="input-group date-picker-popup">
+            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="status.opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" readonly />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
+          {{dt}}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="isAllDay" class="col-sm-4 control-label no-top">Is all day:</label>
+        <div class="col-md-8">
+          <input type="checkbox" id="isAllday" ng-model="calendarEvent.isAllDay">
+        </div>
+      </div>
+      <div class="form-group" ng-hide="calendarEvent.isAllDay">
+        <label for="date" class="col-sm-4 control-label">From:</label>
+        <div class="col-md-8">
+          <uib-timepicker ng-model="from" ng-change="changed()" show-spinners="false" hour-step="1" minute-step="30" show-meridian="true"></uib-timepicker>
+        </div>
+      </div>
+      <div class="form-group" ng-hide="calendarEvent.isAllDay">
+        <label for="date" class="col-sm-4 control-label">To:</label>
+        <div class="col-md-8">
+          <uib-timepicker ng-model="to" ng-change="changed()" hour-step="1" show-spinners="false" minute-step="30" show-meridian="true"></uib-timepicker>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="color" class="col-sm-4 control-label">Calendar:</label>
+        <div class="col-sm-8">
+          <select class="form-control" id="color" ng-model="calendarEvent.calendar"
+          ng-options="item._id as item.title for item in calendars track by item._id"></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="desc" class="col-sm-4 control-label">Description (optional):</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="desc" ng-model="calendarEvent.description">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="color" class="col-sm-4 control-label">Color (optional):</label>
+        <div class="col-sm-8">
+          <input type="color" class="form-control" id="color" ng-model="calendarEvent.color">
+        </div>
+      </div>
+    </div>
+    <div class="confirm-container" ng-show="isConfirmScreen">
+      <p>Are you sure you want to delete the '{{event.title}}' event?</p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="col-sm-4">
+      <button class="btn btn-danger pull-left" type="button" ng-click="isConfirmScreen = true" ng-hide="isConfirmScreen || !isEditMode">DELETE</button>
+    </div>
+    <div class="col-sm-8">
+      <button class="btn btn-primary" type="button" ng-click="save()" ng-hide="isConfirmScreen">OK</button>
+      <button class="btn btn-warning" type="button" ng-click="cancel()" ng-hide="isConfirmScreen">Cancel</button>
+      <button class="btn btn-success" type="button" ng-click="delete()" ng-show="isConfirmScreen">OK</button>
+      <button class="btn btn-warning" type="button" ng-click="isConfirmScreen = false" ng-show="isConfirmScreen">Cancel</button>
+    </div>
+  </div>
+</form>

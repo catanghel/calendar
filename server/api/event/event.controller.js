@@ -9,7 +9,7 @@
 
  var restful = require('node-restful');
 
- module.exports = function(app, route, io) {
+ module.exports = function(app, route) {
 
   var rest = restful.model(
     'event',

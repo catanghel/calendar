@@ -17,9 +17,12 @@ var CalendarEventSchema = new Schema({
     type: ObjectId,
     required: true
   },
+  color: {
+    type: String,
+    default: '#ffffff'
+  },
   isAllDay: {
-    type: Boolean,
-    default: false
+    type: Boolean
   },
   start: {
     type: Number,

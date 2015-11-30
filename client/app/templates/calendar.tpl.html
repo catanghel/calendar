@@ -22,12 +22,9 @@
       ng-repeat="day in week.days"
       data-month="{{day.month}}"
       data-day="{{day.number}}"
-      events="{{eventsThisMonth}}"
       ng-class="{ today: day.isToday, 'different-month': !day.isCurrentMonth, selected: day.date.isSame(selected), 'long-month': weeks.length === 6 }" ng-click="select(day)">
       <div class="day" >{{day.number}}</div>
-      <ul class="events-container">
-        <li class="event" ng-repeat="event in eventsToday">{{ event.title }}</li>
-      </ul>
+      <ul class="events-container"></ul>
     </td>
   </tr>
 </tbody>

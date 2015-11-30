@@ -2,22 +2,20 @@
 (function() {
   'use strict';
 
-  angular.module('clientApp').controller('CalendarCtrl', function ($scope, Calendar, CalendarEvent, Socket, $uibModal) {
+  angular.module('clientApp').controller('CalendarCtrl', function ($scope, $compile, Calendar, CalendarEvent, Socket, $uibModal) {
 
     $scope.calendars = [];
     $scope.events = [];
     $scope.calendar = {};
 
-    Socket.on('message', function (msg) {
-      console.log(msg);
-    });
+    function getCalendars(calendars) {
+      $scope.calendars = calendars;
+      if (calendars.length) {
+        $scope.onCalendarSelect($scope.calendars[0]._id);
+      }
+    }
 
-    $scope.onCalendarSelect = function (id) {
-      $scope.calendar = id;
-      CalendarEvent.getList({calendar: $scope.calendar}).then($scope.populate);
-    };
-
-    $scope.populate = function(events) {
+    $scope.populate = function (events) {
       var eventsThisMonth;
       if (events) {
         $scope.events = events;
@@ -37,15 +35,24 @@
         if (e) {
           dayOfMonth = moment(e.start).date();
           day = $('[data-day=' + dayOfMonth + ']').find('.events-container');
-          day.empty();
-          day.append('<li class="event">' + e.title + '</li>');
+          angular.element(day).append($compile('<li class="event" style="background: ' + e.color + '"> ' +
+            '<a popover-placement="eventPopOver.placement" ' +
+            'ng-controller="EventPopOverCtrl" ' +
+            'popover-is-open="eventPopOver.isOpen" ' +
+            'popover-template="eventPopOver.templateUrl" ' +
+            'popover-trigger="none" ' +
+            'ng-click="eventPopOver.open(\'' + e._id + '\')">' + e.title + '</a></li>')($scope));
         }
       });
     };
 
-    $scope.open = function (id) {
+    $scope.onCalendarSelect = function (id) {
+      $scope.calendar = id;
+      CalendarEvent.getList({calendar: $scope.calendar}).then($scope.populate);
+    };
 
-      var modalInstance = $uibModal.open({
+    $scope.openCalendarModal = function (id) {
+      $uibModal.open({
         animation: true,
         templateUrl: './templates/calendarForm.tpl.html',
         controller: 'CalendarFormCtrl',
@@ -56,30 +63,36 @@
           }
         }
       });
-
-      /*modalInstance.result.then(function (calendarItem) {
-        console.log(calendarItem);
-      }, function () {
-        console.log('Modal dismissed at: ' + new Date());
-      });*/
     };
 
-    function getEvents(calendars) {
-      $scope.calendars = calendars;
-      if (calendars.length) {
-        $scope.onCalendarSelect($scope.calendars[0]._id);
-      }
-    }
+    $scope.openEventModal = function (id) {
+      $uibModal.open({
+        animation: true,
+        templateUrl: './templates/eventForm.tpl.html',
+        controller: 'EventFormCtrl',
+        size: 'md',
+        resolve: {
+          eventId: function () {
+            return id;
+          },
+          calendars: function () {
+            return $scope.calendars;
+          }
+        }
+      });
+    };
+
+    Calendar.getList().then(getCalendars);
 
     Socket.on('calendar', function (msg) {
-      console.log(msg);
       Calendar.getList().then(function(calendars) {
         $scope.calendars = calendars;
       });
     });
 
-
-    Calendar.getList().then(getEvents);
+    Socket.on('event', function (msg) {
+      CalendarEvent.getList({calendar: $scope.calendar}).then($scope.populate);
+    });
 
   });
 })();

@@ -27,10 +27,18 @@ body {
 .calendar-list {
 	clear: both;
 	margin-top: 55px;
-	
+
 	.list-group-item {
 		cursor: pointer;
 	}
+}
+
+// over bootstrap
+.form-horizontal .control-label {
+  &.no-top {
+    margin-top: 0;
+    padding-top: 0;
+  }
 }
 
 
