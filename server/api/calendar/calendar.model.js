@@ -12,7 +12,7 @@ var CalendarSchema = mongoose.Schema({
   },
   color: {
   	type: String,
-    default: '#c0c0c0'
+    default: ''
   }
 });
 

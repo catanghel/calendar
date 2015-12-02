@@ -24,7 +24,7 @@
       }
     };
 
-    $scope.openEventModal = function(id) {
+    $scope.openEventModal = function(id, deleteEvent) {
       $scope.eventPopOver.isOpen = false;
       $uibModal.open({
         animation: true,
@@ -34,6 +34,12 @@
         resolve: {
           eventId: function () {
             return id;
+          },
+          calendarId: function () {
+            return $scope.calendar;
+          },
+          deleteEvent: function (){
+            return deleteEvent;
           },
           calendars: function () {
             return $scope.calendars;

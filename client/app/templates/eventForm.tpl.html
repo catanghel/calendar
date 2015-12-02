@@ -19,7 +19,6 @@
               <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
           </p>
-          {{dt}}
         </div>
       </div>
       <div class="form-group">
@@ -44,7 +43,30 @@
         <label for="color" class="col-sm-4 control-label">Calendar:</label>
         <div class="col-sm-8">
           <select class="form-control" id="color" ng-model="calendarEvent.calendar"
-          ng-options="item._id as item.title for item in calendars track by item._id"></select>
+          ng-options="item._id as item.title for item in calendars"></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="color" class="col-sm-4 control-label">Color:</label>
+        <div class="col-sm-8">
+          <input type="hidden" class="form-control" id="color" ng-model="calendarEvent.color">
+          <div class="color-swatches">
+            <div class="color-swatch brand-primary" ng-click="calendarEvent.color = '#337ab7'">
+              <span class="glyphicon glyphicon-ok" ng-show="calendarEvent.color === '#337ab7'"></span>
+            </div>
+            <div class="color-swatch brand-success" ng-click="calendarEvent.color = '#5cb85c'">
+              <span class="glyphicon glyphicon-ok" ng-show="calendarEvent.color === '#5cb85c'"></span>
+            </div>
+            <div class="color-swatch brand-info" ng-click="calendarEvent.color = '#5bc0de'">
+              <span class="glyphicon glyphicon-ok" ng-show="calendarEvent.color === '#5bc0de'"></span>
+            </div>
+            <div class="color-swatch brand-warning" ng-click="calendarEvent.color = '#f0ad4e'">
+              <span class="glyphicon glyphicon-ok" ng-show="calendarEvent.color === '#f0ad4e'"></span>
+            </div>
+            <div class="color-swatch brand-danger" ng-click="calendarEvent.color = '#d9534f'">
+              <span class="glyphicon glyphicon-ok" ng-show="calendarEvent.color === '#d9534f'"></span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="form-group">
@@ -53,35 +75,12 @@
           <input type="text" class="form-control" id="desc" ng-model="calendarEvent.description">
         </div>
       </div>
-      <div class="form-group">
-        <label for="color" class="col-sm-4 control-label">Color (optional):</label>
-        <div class="col-sm-8">
-          <input type="hidden" class="form-control" id="color" ng-model="calendarEvent.color">
-          <div class="color-swatches">
-          <div class="color-swatch brand-primary" ng-click="calendarEvent.color = '#337ab7'">
-            <span class="glyphicon glyphicon-ok" ng-show="calendarEvent.color === '#337ab7'"></span>
-          </div>
-          <div class="color-swatch brand-success" ng-click="calendarEvent.color = '#5cb85c'">
-            <span class="glyphicon glyphicon-ok" ng-show="calendarEvent.color === '#5cb85c'"></span>
-          </div>
-          <div class="color-swatch brand-info" ng-click="calendarEvent.color = '#5bc0de'">
-            <span class="glyphicon glyphicon-ok" ng-show="calendarEvent.color === '#5bc0de'"></span>
-          </div>
-          <div class="color-swatch brand-warning" ng-click="calendarEvent.color = '#f0ad4e'">
-            <span class="glyphicon glyphicon-ok" ng-show="calendarEvent.color === '#f0ad4e'"></span>
-          </div>
-          <div class="color-swatch brand-danger" ng-click="calendarEvent.color = '#d9534f'">
-            <span class="glyphicon glyphicon-ok" ng-show="calendarEvent.color === '#d9534f'"></span>
-          </div>
-          </div>
-        </div>
-      </div>
     </div>
     <div class="confirm-container" ng-show="isConfirmScreen">
-      <p class="alert alert-danger">Are you sure you want to delete the '{{event.title}}' event?</p>
+      <p class="alert alert-danger">Are you sure you want to delete the '{{calendarEvent.title}}' event?</p>
     </div>
   </div>
-  <div class="modal-footer bg-info">
+  <div class="modal-footer">
     <div class="col-sm-4">
       <button class="btn btn-danger pull-left" type="button" ng-click="isConfirmScreen = true" ng-hide="isConfirmScreen || !isEditMode">DELETE</button>
     </div>

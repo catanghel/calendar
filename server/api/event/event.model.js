@@ -19,7 +19,7 @@ var CalendarEventSchema = new Schema({
   },
   color: {
     type: String,
-    default: '#ffffff'
+    defaut: ''
   },
   isAllDay: {
     type: Boolean

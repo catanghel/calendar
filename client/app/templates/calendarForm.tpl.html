@@ -11,15 +11,32 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="desc" class="col-sm-4 control-label">Description (optional):</label>
+        <label for="color" class="col-sm-4 control-label">Color:</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="desc" ng-model="calendar.description">
+          <input type="hidden" class="form-control" id="color" ng-model="calendar.color">
+          <div class="color-swatches">
+            <div class="color-swatch brand-primary" ng-click="calendar.color = '#337ab7'">
+              <span class="glyphicon glyphicon-ok" ng-show="calendar.color === '#337ab7'"></span>
+            </div>
+            <div class="color-swatch brand-success" ng-click="calendar.color = '#5cb85c'">
+              <span class="glyphicon glyphicon-ok" ng-show="calendar.color === '#5cb85c'"></span>
+            </div>
+            <div class="color-swatch brand-info" ng-click="calendar.color = '#5bc0de'">
+              <span class="glyphicon glyphicon-ok" ng-show="calendar.color === '#5bc0de'"></span>
+            </div>
+            <div class="color-swatch brand-warning" ng-click="calendar.color = '#f0ad4e'">
+              <span class="glyphicon glyphicon-ok" ng-show="calendar.color === '#f0ad4e'"></span>
+            </div>
+            <div class="color-swatch brand-danger" ng-click="calendar.color = '#d9534f'">
+              <span class="glyphicon glyphicon-ok" ng-show="calendar.color === '#d9534f'"></span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="form-group">
-        <label for="color" class="col-sm-4 control-label">Color (optional):</label>
+        <label for="desc" class="col-sm-4 control-label">Description (optional):</label>
         <div class="col-sm-8">
-          <input type="color" class="form-control" id="color" ng-model="calendar.color">
+          <input type="text" class="form-control" id="desc" ng-model="calendar.description">
         </div>
       </div>
     </div>
@@ -31,7 +48,7 @@
     <div class="col-sm-4">
       <button class="btn btn-danger pull-left" type="button" ng-click="isConfirmScreen = true" ng-hide="isConfirmScreen || !isEditMode">DELETE</button>
     </div>
-    <div class="col-sm-8 bg-info">
+    <div class="col-sm-8">
       <button class="btn btn-primary" type="button" ng-click="save()" ng-hide="isConfirmScreen">OK</button>
       <button class="btn btn-warning" type="button" ng-click="cancel()" ng-hide="isConfirmScreen">Cancel</button>
       <button class="btn btn-success" type="button" ng-click="delete()" ng-show="isConfirmScreen">OK</button>

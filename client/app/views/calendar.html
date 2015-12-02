@@ -2,23 +2,23 @@
   <div class="vertical-nav">
     <div class="text-center">
       <div class="btn-group" uib-dropdown>
-        <button id="split-button" type="button" class="btn btn-danger">CREATE</button>
+        <button id="split-button" type="button"
+        class="btn btn-danger" ng-click="openEventModal()" ng-disabled="!calendars.length">CREATE</button>
         <button type="button" class="btn btn-danger" uib-dropdown-toggle>
           <span class="caret"></span>
           <span class="sr-only">Split button!</span>
         </button>
         <ul class="uib-dropdown-menu" role="menu" aria-labelledby="split-button">
           <li role="menuitem"><a ng-click="openCalendarModal()">Calendar</a></li>
-          <li role="menuitem"><a ng-click="openEventModal()">Event</a></li>
+          <li role="menuitem" ng-if="calendars.length"><a ng-click="openEventModal()">Event</a></li>
         </ul>
       </div>
     </div>
-    <div class="list-group calendar-list">
-      <li class="list-group-item" ng-repeat="calendar in calendars" ng-click="onCalendarSelect(calendar._id)" data-color="{{ calendar.color }}">
-        <span class="glyphicon glyphicon-th-large"></span>
-        {{ calendar.title }}
-        <span class="glyphicon glyphicon-cog pull-right" ng-click="openCalendarModal(calendar._id)"></span>
-      </li>
+    <div class="list-group calendar-list" ng-if="calendars.length">
+      <p>My calendars</p>
+      <select id="calendar" ng-model="calendar"
+      ng-options="item._id as item.title for item in calendars" ng-change="onCalendarSelect()"></select>
+      <span class="glyphicon glyphicon-cog pull-right" ng-click="openCalendarModal(calendar)"></span>
     </div>
   </div>
   <div class="calendar" calendar></div>

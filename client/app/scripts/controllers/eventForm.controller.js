@@ -2,7 +2,7 @@
 (function() {
   'use strict';
 
-  angular.module('clientApp').controller('EventFormCtrl', function ($scope, $uibModalInstance, Calendar, CalendarEvent, eventId, calendars) {
+  angular.module('clientApp').controller('EventFormCtrl', function ($scope, $uibModalInstance, Calendar, CalendarEvent, eventId, calendarId, deleteEvent, calendars) {
 
     $scope.calendars = calendars || [];
     $scope.calendarEvent = {};
@@ -18,6 +18,9 @@
     if (eventId) {
       $scope.isEditMode = true;
       CalendarEvent.one(eventId).get().then(function(calendarEvent) {
+        if (deleteEvent) {
+          $scope.isConfirmScreen = true;
+        }
         $scope.calendarEvent = calendarEvent;
         $scope.dt = moment(calendarEvent.start).format('DD MMMM YYYY');
         $scope.from = moment(calendarEvent.start);
@@ -25,6 +28,8 @@
       });
     } else {
       $scope.calendarEvent.isAllDay = true;
+      $scope.calendarEvent.color = '#337ab7';
+      $scope.calendarEvent.calendar = calendarId;
       $scope.dt = moment().format('DD MMMM YYYY');
       $scope.from = moment().hour(9).minute(0);
       $scope.to = moment().hour(10).minute(0);

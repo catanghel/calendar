@@ -12,28 +12,28 @@
 			Calendar.one(calendarId).get().then(function(calendar) {
 				$scope.calendar = calendar;
 			});
-		}
+		} else {
+      $scope.calendar.color = '#337ab7';
+    }
 
-		function closeModal() {
-			$uibModalInstance.close($scope.calendar);
-		}
+    function closeModal() {
+     $uibModalInstance.close($scope.calendar);
+   }
 
-		$scope.save = function () {
-			if ($scope.isEditMode) {
-				$scope.calendar.save().then(closeModal);
-			} else {
-				Calendar.post($scope.calendar).then(closeModal);
-			}
-		};
+   $scope.save = function () {
+    if ($scope.isEditMode) {
+      $scope.calendar.save().then(closeModal);
+    } else {
+      Calendar.post($scope.calendar).then(closeModal);
+    }
+  };
 
-		$scope.delete = function () {
-			$scope.calendar.remove().then(closeModal);
-		};
+  $scope.delete = function () {
+   $scope.calendar.remove().then(closeModal);
+ };
 
-		$scope.cancel = function () {
-			$uibModalInstance.dismiss('cancel');
-		};
-
-	});
-
+ $scope.cancel = function () {
+   $uibModalInstance.dismiss('cancel');
+ };
+});
 })();
