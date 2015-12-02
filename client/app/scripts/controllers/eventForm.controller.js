@@ -78,8 +78,6 @@
       $scope.dt = moment(year, month, day);
     };
 
-    // time picker
-
   });
 
 })();

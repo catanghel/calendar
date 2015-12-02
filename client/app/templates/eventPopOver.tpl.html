@@ -1,10 +1,13 @@
-<div>
-  <a class="pull-right" ng-click="eventPopOver.close()">Close</a>
+<div class="popover-header">
+  <h4 class="text-primary">{{calendarEvent.title}}</h4>
+  <button class="pull-right close popover-close" type="button" aria-label="Close" ng-click="eventPopOver.close()"><span aria-hidden="true">&times;</span></button>
 </div>
-<h1>{{calendarEvent.title}}</h1>
-<p>{{eventDate}}</p>
-<p>Calendar: {{calendar.title}}</p>
-<div>
-  <a class="pull-left">Delete</a>
+<div class="popover-body">
+  <p><strong>When:</strong> {{ calendarEvent.start | date : 'EEE, MMMM d'}}</p>
+  <p ng-if="!calendarEvent.isAllDay">{{ calendarEvent.start | date :'h:mm a'}} - {{ calendarEvent.end | date : 'h:mm a'}}</p>
+  <p><strong>Calendar:</strong> {{calendar.title}}</p>
+</div>
+<div class="popover-footer">
+  <a class="pull-left" ng-click="deleteEvent(calendarEvent._id)">Delete</a>
   <a class="pull-right" ng-click="openEventModal(calendarEvent._id)">Edit event >></a>
 </div>

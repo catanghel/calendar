@@ -31,68 +31,85 @@
       $('.event').remove();
 
       _.each(eventsThisMonth, function(e) {
-        var dayOfMonth, day;
+        var dayOfMonth, days, day, eventString, eventsContainer;
         if (e) {
           dayOfMonth = moment(e.start).date();
-          day = $('[data-day=' + dayOfMonth + ']').find('.events-container');
-          angular.element(day).append($compile('<li class="event" style="background: ' + e.color + '"> ' +
-            '<a popover-placement="eventPopOver.placement" ' +
-            'ng-controller="EventPopOverCtrl" ' +
-            'popover-is-open="eventPopOver.isOpen" ' +
-            'popover-template="eventPopOver.templateUrl" ' +
-            'popover-trigger="none" ' +
-            'ng-click="eventPopOver.open(\'' + e._id + '\')">' + e.title + '</a></li>')($scope));
-        }
-      });
-    };
+          days = $('[data-day=' + dayOfMonth + ']');
 
-    $scope.onCalendarSelect = function (id) {
-      $scope.calendar = id;
-      CalendarEvent.getList({calendar: $scope.calendar}).then($scope.populate);
-    };
-
-    $scope.openCalendarModal = function (id) {
-      $uibModal.open({
-        animation: true,
-        templateUrl: './templates/calendarForm.tpl.html',
-        controller: 'CalendarFormCtrl',
-        size: 'md',
-        resolve: {
-          calendarId: function () {
-            return id;
+          if (days.length > 1) {
+            if (dayOfMonth < 10 ) {
+              day = $(days[0]);
+            } else {
+              day = $(days[1]);
+            }
           }
-        }
-      });
-    };
 
-    $scope.openEventModal = function (id) {
-      $uibModal.open({
-        animation: true,
-        templateUrl: './templates/eventForm.tpl.html',
-        controller: 'EventFormCtrl',
-        size: 'md',
-        resolve: {
-          eventId: function () {
-            return id;
-          },
-          calendars: function () {
-            return $scope.calendars;
+          eventsContainer = day.find('.events-container');
+          eventString = '<li class="event" style="background: ' + e.color + '"> ' +
+          '<a ng-controller="EventPopOverCtrl" ';
+          if (day.parent().is(':first-child')) {
+            eventString += 'popover-placement="bottom" ';
+          } else if(day.is(':last-child')) {
+            eventString += 'popover-placement="left" ';
           }
+          eventString += 'popover-is-open="eventPopOver.isOpen" ' +
+          'popover-template="eventPopOver.templateUrl" ' +
+          'popover-trigger="none" ' +
+          'ng-click="eventPopOver.open(\'' + e._id + '\')">' + e.title + '</a></li>';
+
+          angular.element(eventsContainer).append($compile(eventString)($scope));
         }
       });
-    };
+}
 
-    Calendar.getList().then(getCalendars);
 
-    Socket.on('calendar', function (msg) {
-      Calendar.getList().then(function(calendars) {
-        $scope.calendars = calendars;
-      });
-    });
+$scope.onCalendarSelect = function (id) {
+  $scope.calendar = id;
+  CalendarEvent.getList({calendar: $scope.calendar}).then($scope.populate);
+};
 
-    Socket.on('event', function (msg) {
-      CalendarEvent.getList({calendar: $scope.calendar}).then($scope.populate);
-    });
-
+$scope.openCalendarModal = function (id) {
+  $uibModal.open({
+    animation: true,
+    templateUrl: './templates/calendarForm.tpl.html',
+    controller: 'CalendarFormCtrl',
+    size: 'md',
+    resolve: {
+      calendarId: function () {
+        return id;
+      }
+    }
   });
+};
+
+$scope.openEventModal = function (id) {
+  $uibModal.open({
+    animation: true,
+    templateUrl: './templates/eventForm.tpl.html',
+    controller: 'EventFormCtrl',
+    size: 'md',
+    resolve: {
+      eventId: function () {
+        return id;
+      },
+      calendars: function () {
+        return $scope.calendars;
+      }
+    }
+  });
+};
+
+Calendar.getList().then(getCalendars);
+
+Socket.on('calendar', function (msg) {
+  Calendar.getList().then(function(calendars) {
+    $scope.calendars = calendars;
+  });
+});
+
+Socket.on('event', function (msg) {
+  CalendarEvent.getList({calendar: $scope.calendar}).then($scope.populate);
+});
+
+});
 })();

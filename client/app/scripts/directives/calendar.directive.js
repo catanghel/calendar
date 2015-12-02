@@ -54,6 +54,7 @@
 
         scope.selected = reset(scope.selected || moment());
         scope.month = scope.selected.clone();
+        scope.today = scope.selected.clone();
 
         start = scope.selected.clone();
         start.date(1);
@@ -82,6 +83,17 @@
           buildMonth(scope, previous, scope.month);
           setTimeout(scope.populate, 100);
         };
+
+        scope.setToday = function() {
+          var today = scope.today.clone();
+
+          reset(today.month(today.month()).date(1));
+          scope.month.month(today.month());
+          scope.month.year(today.year());
+          buildMonth(scope, today, scope.month);
+          setTimeout(scope.populate, 100);
+        };
+
 
       }
     };

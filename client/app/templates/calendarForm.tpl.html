@@ -24,14 +24,14 @@
       </div>
     </div>
     <div class="confirm-container" ng-show="isConfirmScreen">
-      <p>Are you sure you want to delete the '{{calendar.title}}' calendar?</p>
+      <p class="alert alert-danger">Are you sure you want to delete the '{{calendar.title}}' calendar?</p>
     </div>
   </div>
   <div class="modal-footer">
     <div class="col-sm-4">
       <button class="btn btn-danger pull-left" type="button" ng-click="isConfirmScreen = true" ng-hide="isConfirmScreen || !isEditMode">DELETE</button>
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-8 bg-info">
       <button class="btn btn-primary" type="button" ng-click="save()" ng-hide="isConfirmScreen">OK</button>
       <button class="btn btn-warning" type="button" ng-click="cancel()" ng-hide="isConfirmScreen">Cancel</button>
       <button class="btn btn-success" type="button" ng-click="delete()" ng-show="isConfirmScreen">OK</button>

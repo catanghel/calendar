@@ -1,10 +1,13 @@
 <div class="calendar-header">
-  <span ng-click="today()" class="btn btn-default">Today</span>
+  <div class="logo">
+    <h3 class="text-center text-danger">Calendar</h3>
+  </div>
+  <span ng-click="setToday()" class="btn btn-default">Today</span>
   <span ng-click="previous()" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i></span>
   <span ng-click="next()" class="btn btn-default"><i class="glyphicon glyphicon-chevron-right"></i></span>
   <span class="date">{{month.format("MMMM YYYY")}}</span>
 </div>
-<table width="100%" height="100%" class="table table-bordered">
+<table width="100%" height="100%" class="table table-bordered calendar-table">
   <thead>
     <tr>
       <td><span class="day-name">Sun</span></td>
@@ -20,7 +23,6 @@
     <tr class="week-days" ng-repeat="week in weeks">
       <td class="day-container"
       ng-repeat="day in week.days"
-      data-month="{{day.month}}"
       data-day="{{day.number}}"
       ng-class="{ today: day.isToday, 'different-month': !day.isCurrentMonth, selected: day.date.isSame(selected), 'long-month': weeks.length === 6 }" ng-click="select(day)">
       <div class="day" >{{day.number}}</div>

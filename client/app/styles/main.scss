@@ -16,12 +16,18 @@ body {
 	height: 100%;
 }
 
+.logo {
+  display: inline-block;
+  margin: 0 45px;
+}
+
 .vertical-nav {
 	width: 200px;
 	height: 100%;
 	padding: 15px 10px;
 	position: absolute;
 	left: 0;
+  top: 60px;
 }
 
 .calendar-list {
@@ -41,6 +47,33 @@ body {
   }
 }
 
+.table-bordered {
+  border: none;
+}
+
+.table-bordered > thead > tr > td {
+  border: none;
+}
+
+.popover {
+  min-width: 270px;
+}
+
+.brand-primary {
+  background-color: $brand-primary;
+}
+.brand-success {
+  background-color: $brand-success;
+}
+.brand-info {
+  background-color: $brand-info;
+}
+.brand-warning {
+  background-color: $brand-warning;
+}
+.brand-danger {
+  background-color: $brand-danger;
+}
 
 
 

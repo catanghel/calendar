@@ -5,7 +5,6 @@
 
     $scope.calendarEvent = {};
     $scope.calendar = {};
-    $scope.eventDate = '-';
 
     $scope.eventPopOver = {
       isOpen: false,
@@ -14,8 +13,6 @@
       open: function(id) {
         CalendarEvent.one(id).get().then(function(calendarEvent) {
           $scope.calendarEvent = calendarEvent;
-          $scope.eventDate = moment(calendarEvent.start).format('DD MMMM YYYY');
-          console.log($scope.eventDate);
           Calendar.one($scope.calendarEvent.calendar).get().then(function(calendar) {
             $scope.calendar = calendar;
             $scope.eventPopOver.isOpen = true;
