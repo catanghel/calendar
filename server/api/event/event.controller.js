@@ -15,6 +15,7 @@
     'event',
     app.models.event
     ).methods(['get', 'put', 'post', 'delete']);
+  rest.shouldUseAtomicUpdate = false;
 
   rest.after('put', function(req, res, next) {
     var locals = res.locals;

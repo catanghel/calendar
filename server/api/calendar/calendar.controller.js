@@ -8,6 +8,7 @@
  'use strict';
 
  var restful = require('node-restful');
+ 
 
  module.exports = function(app, route) {
 
@@ -15,6 +16,7 @@
     'calendar',
     app.models.calendar
     ).methods(['get', 'put', 'post', 'delete']);
+  rest.shouldUseAtomicUpdate = false;
 
   rest.after('put', function(req, res, next) {
     var locals = res.locals;
